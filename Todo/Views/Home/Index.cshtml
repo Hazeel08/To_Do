@@ -1,0 +1,185 @@
+﻿@model IEnumerable<CapaDatos.Entidades.ToDo>
+
+@{
+    ViewData["Title"] = "Lista Tareas";
+}
+
+<div>
+    <h1 class="mt-5 mb-3 titulos">
+        Lista de Tareas
+        <a class="btn btn-info" title="Crear" data-bs-toggle="tooltip" asp-action="Crear" asp-controller="ToDo">
+            <i class="fa-solid fa-plus icono"></i>
+        </a>
+    </h1>
+</div>
+
+<div class="mt-5 mb-5 text-center">
+    <h5>Filtro por estado</h5>
+
+    <div class="row my-4 filtroEstados">
+        <div id="todos" class="col-4">
+            <a class="d-block text-light estado">Todas</a>
+        </div>
+
+        <div id="pendientes" class="col-4">
+            <a class="d-block text-light estado">Pendientes</a>
+        </div>
+
+        <div id="completados" class="col-4">
+            <a class="d-block text-light estado">Completadas</a>
+        </div>
+    </div>
+</div>
+
+@if (Model.Count() != 0)
+{
+    <table id="table" data-update-target="table" class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ChkEstado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ToDoEstado.Descripcion)
+                </th>
+                <th colspan="3">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @if (item.ToDoEstado.Id == 1)
+                    {
+                        <td>
+                            <input type="checkbox" checked disabled />
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <input class="checkbox-item" type="checkbox" value="@item.Id" id="@item.Id" />
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ToDoEstado.Descripcion)
+                    </td>
+
+                    <td>
+                        <a class="btn btn-info" asp-action="Detalle" asp-controller="ToDo" asp-route-id="@item.Id"
+                   data-bs-toggle="tooltip" title="Detalle">
+                            <i class="fa-solid fa-info icono"></i>
+                        </a>
+                    </td>
+
+                    @if (item.EstadoId == 2)
+                    {
+                        <td>
+                            <a class="btn btn-info" asp-action="Editar" asp-controller="ToDo" asp-route-id="@item.Id"
+                   data-bs-toggle="tooltip" title="Editar">
+                                <i class="fa-solid fa-pen-to-square icono"></i>
+                            </a>
+                        </td>
+                    }
+
+                    <td>
+                        <a class="btn btn-info" asp-action="Eliminar" asp-controller="ToDo" asp-route-id="@item.Id"
+                   data-bs-toggle="tooltip" title="Eliminar">
+                            <i class="fa-solid fa-trash icono"></i>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-success" role="alert">
+        Sin datos para mostrar
+    </div>
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            // Función para cargar los datos de la tabla al inicio
+            function cargarTabla() {
+                $.ajax({
+                    url: '@Url.Action("ObtenerTodos", "ToDo")',
+                    type: 'GET',
+                    success: function (result) {
+                        $('.table-body').replaceWith(result);
+                        actualizarEstadoId();
+                    },
+                });
+            }
+
+            cargarTabla();
+
+            // Función para filtrar la tabla por estado
+            function filtrarPorEstado(id) {
+                $.ajax({
+                    url: '@Url.Action("ObtenerTodoPorIdEstado", "ToDo")',
+                    type: 'GET',
+                    data: { id: id },
+                    success: function (result) {
+                        $('.table-body').replaceWith(result);
+                        actualizarEstadoId();
+                    },
+                });
+            }
+
+            // Evento del checkbox para cambiar el estado de la tarea
+            function actualizarEstadoId() {
+                $('.checkbox-item').on('change', function () {
+                    var isChecked = $(this).is(':checked');
+                    var itemId = $(this).val();
+
+                    // Solicitud AJAX para actualizar el estado
+                    $.ajax({
+                        url: '@Url.Action("ActualizarEstado", "ToDo")',
+                        type: 'POST',
+                        data: {
+                            id: itemId,
+                            isChecked: isChecked
+                        },
+                        success: function (result) {
+                            $('.table-body').replaceWith(result);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                });
+            }
+
+            // Eventos para el filtro de la tabla
+            $('#todos').click(function () {
+                cargarTabla();
+            });
+
+            $('#completados').click(function () {
+                filtrarPorEstado(1); // ID de completados
+            });
+
+            $('#pendientes').click(function () {
+                filtrarPorEstado(2); // ID de pendientes
+            });
+        });
+
+    </script>
+}

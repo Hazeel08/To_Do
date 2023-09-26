@@ -1,0 +1,23 @@
+﻿@model CapaDatos.Entidades.ToDo
+
+@{
+    ViewData["Title"] = "Detalle Tarea";
+}
+
+<div>
+    <input type="hidden" asp-for="Id" />
+
+    <h1 class="titulos mt-5">Detalle Tarea</h1>
+
+    <div class="mt-5 contenedorDetalle">
+        <h5 class="mb-3"><span class="subtitulosDetalle">Título:</span> @Model.Titulo</h5>
+        <h5 class="mb-3"><span class="subtitulosDetalle">Descripción:</span> @Model.Descripcion</h5>
+        <h5 class="mb-3"><span class="subtitulosDetalle">Estado:</span> @Model.ToDoEstado.Descripcion</h5>
+        <h5 class="mb-3"><span class="subtitulosDetalle">Fecha de registro:</span> @Model.FechaRegistro.ToString("dd/MM/yyyy")</h5>
+    </div>
+
+    <div class=" text-center">
+        <a class="btn bg-info mt-5" asp-action="Index" asp-controller="Home">Regresar</a>
+    </div>
+</div>
+

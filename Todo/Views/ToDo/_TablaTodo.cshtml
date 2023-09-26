@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CapaDatos.Entidades.ToDo>
+
+    <tbody class="table-body">
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.ToDoEstado.Id == 1)
+                {
+                    <td>
+                        <input type="checkbox" checked disabled />
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <input class="checkbox-item" type="checkbox" value="@item.Id" id="@item.Id" />
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToDoEstado.Descripcion)
+                </td>
+                <td>
+                    <a class="btn btn-info" asp-action="ObtenerToDo" asp-controller="ToDo" asp-route-id="@item.Id"
+                   data-bs-toggle="tooltip" title="Detalle">
+                        <i class="fa-solid fa-info"></i>
+                    </a>
+                </td>
+                @if (item.EstadoId == 2)
+                {
+                    <td>
+                        <a class="btn btn-info" asp-action="Editar" asp-controller="ToDo" asp-route-id="@item.Id"
+                   data-bs-toggle="tooltip" title="Editar">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                }
+                <td>
+                <a class="btn btn-info" asp-action="Eliminar" asp-controller="ToDo" asp-route-id="@item.Id"
+                   data-bs-toggle="tooltip" title="Eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>

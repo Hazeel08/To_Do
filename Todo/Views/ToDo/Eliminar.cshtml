@@ -1,0 +1,13 @@
+﻿@model  CapaDatos.Entidades.ToDo
+
+@{
+    ViewData["Title"] = "Eliminar Tarea";
+}
+
+<h3 class="text-center preguntaEliminar">¿Está seguro que desea eliminar la tarea llamada <strong>@Model.Titulo</strong>?</h3>
+
+<form asp-action="EliminarToDo" class="m-5 text-center">
+    <input type="hidden" asp-for="Id"/>
+    <button class="btn bg-danger" type="submit">Eliminar</button>
+    <a class="btn bg-info" asp-action="Index" asp-controller="Home">Cancelar</a>
+</form>

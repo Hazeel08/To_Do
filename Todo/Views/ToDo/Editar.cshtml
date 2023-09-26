@@ -1,0 +1,32 @@
+﻿@model CapaDatos.Entidades.ToDo
+
+@{
+    ViewData["Title"] = "Editar Tarea";
+}
+
+<h1 class="titulos mt-5">Editar @Model.Titulo</h1>
+
+<form asp-action="Editar" class="m-5">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id"/>
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label"></label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Descripcion" class="form-label"></label>
+        <textarea asp-for="Descripcion" rows="3" class="form-control"></textarea>
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+
+    <div class="container text-center mt-5">
+        <button type="submit" class="btn btnGuardar">Guardar</button>
+        <a class="btn bg-info" asp-action="Index" asp-controller="Home">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

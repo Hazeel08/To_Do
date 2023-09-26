@@ -1,0 +1,87 @@
+/*Estilo home*/
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.titulos{
+    font-size: 26px;
+    font-weight:500;
+}
+
+.icono{
+    color:black;
+}
+
+.filtroEstados {
+    width: 50%;
+    margin: 0 auto;
+}
+
+#todos{
+    background-color: grey;
+}
+
+#pendientes {
+    background-color: lightcoral;
+}
+
+#completados {
+    background-color: seagreen;
+}
+
+.estado {
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    width: 100%
+}
+
+thead {
+    background-color: lightgreen;
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    color: white;
+}
+
+/*Estilo crear y modificar*/
+.btnGuardar {
+    background-color: lightgreen;
+}
+
+/*Estilo detalle*/
+.contenedorDetalle{
+    width:50%;
+    background-color: lightgreen;
+    padding: 20px;
+    margin: 0 auto;
+    text-align:center;
+}
+
+.subtitulosDetalle{
+    font-weight:bold;
+}
+
+/*Estilo Eliminar*/
+.preguntaEliminar{
+    margin-top:18%;
+}
