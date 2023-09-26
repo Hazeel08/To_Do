@@ -1,9 +1,9 @@
 # Nombre del proyecto: To Do
 
-Descripción
+Descripción:
 Este es un proyecto de gestión de tareas que te permite organizar tus actividades diarias de manera eficiente.
 
-Tecnologías utilizadas
+Tecnologías utilizadas:
 - c#
 - SQL
 - ADO.NET
@@ -11,10 +11,10 @@ Tecnologías utilizadas
 - JavaScript
 - Bootstrap
 
-Características
+Características:
 - Creación, modificación y eliminación de las tareas.
 - Modificación de los estados de cada tarea.
 - Permite realizar filtros según el estado de las tareas.
 
-Proposito o beneficio
+Proposito o beneficio:
 Este proyecto fue desarrollado con la finalidad de aprender y practicar la programación asíncrona.
