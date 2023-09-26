@@ -9,7 +9,7 @@ Tecnologías utilizadas:
 - CSS
 - SQL
 - ADO.NET
-- ASP.NET
+- ASP.NET Core
 - Ajax
 - JavaScript
 - Bootstrap
