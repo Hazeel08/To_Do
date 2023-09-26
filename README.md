@@ -4,9 +4,12 @@ Descripción:
 Este es un proyecto de gestión de tareas que te permite organizar tus actividades diarias de manera eficiente.
 
 Tecnologías utilizadas:
-- c#
+- C#
+- HTML
+- CSS
 - SQL
 - ADO.NET
+- ASP.NET
 - Ajax
 - JavaScript
 - Bootstrap
